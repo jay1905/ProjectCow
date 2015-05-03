@@ -16,6 +16,7 @@ function cow(){
 	this.moveTurn = true;
 	//////////////////////	
 	this.abductded=false;
+	this.targeted=false;
 	///////////////////////
 	this.imageCow = new Image();
 	this.imageCow.src = 'img/cow.png';

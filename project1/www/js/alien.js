@@ -11,6 +11,8 @@ function alien(){
 	this.moveTurn = true;	
 	this.alive = true;
 	this.health=20;
+	this.abducting=false;
+	this.cowNumber;
 	
 	this.imageAlien = new Image();
 	this.imageAlien.src = 'img/alien.png';
@@ -26,7 +28,10 @@ function alien(){
 	 	this.boxY=this.alienPositionY-this.alienSizeY/2;
 	 	if(this.health>0){
 		 	this.hover();
-		 	this.move();
+		 	if (!this.abducting) {
+		 		this.move();
+		 	}
+		 	
 	 		this.draw();
 	 	}
 	 	else{
@@ -38,14 +43,16 @@ function alien(){
 	 	//DO enemy dieing
 	 	//menu 
 	 };
+	this.abduct=function(cow){
+
+		this.alienPositionX=cow.cowPositionX;
+
+	};
 	this.applyDamage=function(amount){
 
 		this.health-=amount;
 	};
 	this.draw = function(){  
-
-
-
  		b_context.save(); 
 	 	b_context.translate(this.alienPositionX, this.alienPositionY);
 	 	b_context.rotate(this.angle * TO_RADIANS);
@@ -59,10 +66,6 @@ function alien(){
 	      // b_context.stroke();
 		
 	 	b_context.restore(); 
-
-
-	 
-
 	};  
 	this.hover=function(){
 

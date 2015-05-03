@@ -35,7 +35,7 @@ var update = function(){
       cowManager.update();
       //bullets collide with more than one enemy at per frame
       //because of each bullet being checked with every enemy on screen
-      enemyManager.update(player.myBullets);
+      enemyManager.update(player.myBullets,cowManager.cows);
       player.update();
       window.requestAnimFrame(update, document.body);
   };
