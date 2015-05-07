@@ -11,8 +11,10 @@ function alien(){
 	this.moveTurn = true;	
 	this.alive = true;
 	this.health=20;
+
 	this.abducting=false;
 	this.cowNumber;
+	this.arived=false;
 	
 	this.imageAlien = new Image();
 	this.imageAlien.src = 'img/alien.png';
@@ -44,9 +46,23 @@ function alien(){
 	 	//menu 
 	 };
 	this.abduct=function(cow){
-
-		this.alienPositionX=cow.cowPositionX;
-
+		if(!this.arived){
+			this.speed = (this.alienPositionX-cow.cowPositionX)/100;
+			this.alienPositionX+= this.speed*-5;
+			
+			if(this.speed<1&& this.speed>-1){
+				this.speed=1;
+			}
+			console.log(this.speed)
+			this.distance= this.alienPositionX-cow.cowPositionX;
+			if(this.distance<1&& this.distance>-1){
+				this.arived=true;
+			}
+		}
+		else{
+			console.log("boom")
+			this.alienPositionX=cow.cowPositionX;
+		}
 	};
 	this.applyDamage=function(amount){
 
