@@ -53,14 +53,14 @@ function alien(){
 			if(this.speed<1&& this.speed>-1){
 				this.speed=1;
 			}
-			console.log(this.speed)
+			//console.log(this.speed)
 			this.distance= this.alienPositionX-cow.cowPositionX;
 			if(this.distance<1&& this.distance>-1){
 				this.arived=true;
 			}
 		}
 		else{
-			console.log("boom")
+			//console.log("boom")
 			this.alienPositionX=cow.cowPositionX;
 		}
 	};

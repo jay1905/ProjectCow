@@ -17,13 +17,16 @@ var enemyManager = new (function(){
 					
 					if(this.enemies[this.i].alive==false){
 
+						if(this.enemies[this.i].abducting==true){
+							cows[this.enemies[this.i].cowNumber].targeted=false;
+						}
 						this.deleteEnemy(this.i);
 					}
 		}	
 
 
 		//////this is temp?
-		if(this.enemies.length<1){
+		if(this.enemies.length<5){
 			if(Math.floor(Math.random()*10)==5){
 				this.createEnemy();
 			}
@@ -36,12 +39,15 @@ var enemyManager = new (function(){
 			
 			if(this.enemies[this.i].abducting==false){
 			
+				//the enemy might target a cow
 				if(Math.floor(Math.random()*50)==5){
-					console.log("hello");
-					console.log(this.enemies[this.i].cowNumber);
-					this.enemies[this.i].cowNumber=Math.floor(Math.random()*cows.length);
-					console.log(this.enemies[this.i].cowNumber);
-					this.enemies[this.i].abducting=true;
+					
+					this.num = Math.floor(Math.random()*cows.length);
+					if (cows[this.num].targeted==false) {
+						this.enemies[this.i].cowNumber=this.num;
+						this.enemies[this.i].abducting=true;
+						cows[this.num].targeted=true;
+					};
 				}		
 			}
 			else{

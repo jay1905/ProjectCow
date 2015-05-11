@@ -7,23 +7,56 @@ var enemyManager = new (function(){
 
 	this.enemies=[];
 	
-	this.update = function(bullets){  
+	this.update = function(bullets , cows){  
 
 		this.checkcollision(bullets);
+		this.abductCows(cows);
 		for(this.i=0;this.i<this.enemies.length;this.i++){
+
 					this.enemies[this.i].update();
+					
 					if(this.enemies[this.i].alive==false){
 
+						if(this.enemies[this.i].abducting==true){
+							cows[this.enemies[this.i].cowNumber].targeted=false;
+						}
 						this.deleteEnemy(this.i);
 					}
 		}	
-		if(this.enemies.length<8){
-			if(Math.floor(Math.random()*300)==5){
+
+
+		//////this is temp?
+		if(this.enemies.length<5){
+			if(Math.floor(Math.random()*10)==5){
 				this.createEnemy();
 			}
 		}
 
 	};  
+	this.abductCows=function(cows){
+
+		for(this.i=0;this.i<this.enemies.length;this.i++){
+			
+			if(this.enemies[this.i].abducting==false){
+			
+				//the enemy might target a cow
+				if(Math.floor(Math.random()*50)==5){
+					
+					this.num = Math.floor(Math.random()*cows.length);
+					if (cows[this.num].targeted==false) {
+						this.enemies[this.i].cowNumber=this.num;
+						this.enemies[this.i].abducting=true;
+						cows[this.num].targeted=true;
+					};
+				}		
+			}
+			else{
+				this.enemies[this.i].abduct(cows[this.enemies[this.i].cowNumber]);
+
+			}
+		}
+
+	};
 	this.checkcollision=function(bullets){
 
 		for(this.i=0;this.i<bullets.length;this.i++){

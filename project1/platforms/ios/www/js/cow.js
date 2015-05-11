@@ -4,19 +4,27 @@ var b_context = b_canvas.getContext("2d");
 
 function cow(){  
 	
-	
+	////////////////////
 	this.angle=2;
 	this.turn = true;
-	this.moveTurn = true;	
+	////////////////////
+	this.bob =10;
+	this.bobCount=0;
+	this.bobUpDown=true;
+	this.bobMove=0.5;
+	////////////////////
+	this.moveTurn = true;
+	//////////////////////	
 	this.abductded=false;
-	
+	this.targeted=false;
+	///////////////////////
 	this.imageCow = new Image();
 	this.imageCow.src = 'img/cow.png';
 	this.cowSizeX=window.innerWidth/20*2.5;
 	this.cowSizeY=window.innerHeight/20*2.5;
 	this.cowPositionX=window.innerWidth/20*(Math.random()*21);
 	this.cowPositionY=window.innerHeight/20*12;
- 
+ 	/////////////////////////////////////////////
  
 	 this.update=function(){
 	 	this.walk();
@@ -31,7 +39,7 @@ function cow(){
 	 	b_context.restore(); 
 	};  
 	this.walk=function(){
-
+		////////////////////rotating motion
 		if(this.angle>=10&&this.turn==true) {
 			this.turn=false;
 		}else if(this.angle<=0&& this.turn==false){
@@ -41,6 +49,7 @@ function cow(){
 		}else if(this.turn==false){
 			this.angle-=0.3;
 		}
+		/////////////////moving from side to side
 		if(this.cowPositionX>window.innerWidth-100) {
 			this.moveTurn=false;
 		}else if(this.cowPositionX<100){
@@ -50,7 +59,23 @@ function cow(){
 		}else if(this.moveTurn==false) {
 			this.cowPositionX-=2;
 		}
-
+		////////////////bobbing up and down
+		if (this.bobUpDown) {
+			this.cowPositionY+=this.bobMove;
+		}else {
+			this.cowPositionY-=this.bobMove;
+		}
+		if (this.bobCount<this.bob) {
+			this.bobCount+=1;
+		}else {
+			this.bobCount=0;
+			if (this.bobUpDown) {
+				this.bobUpDown=false;
+			}else{
+				this.bobUpDown=true;
+			}
+		}
+		////////////////////////////
 	};
 	
 

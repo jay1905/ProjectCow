@@ -18,7 +18,7 @@ window.setTimeout(callback, 1000 / 60);
 
 b_canvas.width  = window.innerWidth;
 b_canvas.height = window.innerHeight;
-
+var stop=false;
 var player; 
 var enemyManager;
 var cowManager;
@@ -28,69 +28,49 @@ var TO_RADIANS = Math.PI/180;
 b_context.font = "30px Arial";
 
 
-
-    // var explosion = document.createElement('img');  
-    // explosion.src= 'img/buletExplosion.png'
-    // var frames=31;
-    // var actualFrame=0;
-    // var frameCount=0;
-    // var frameWidth=66.5;
-    // var frameHeight=66.5;
-    // var edgex = 66*6;
-    // var frameStepY=0;
-    // var frameStepX=0;
-
 var update = function(){
-  
-  b_context.clearRect(0,0,window.innerWidth,window.innerHeight);
-  b_context.drawImage(BackGround,0,0,b_canvas.width,b_canvas.height);
-  cowManager.update();
-  //bullets collide with more than one enemy at per frame
-  //because of each bullet being checked with every enemy on screen
-  enemyManager.update(player.myBullets);
-  player.update();
-   	
-   	
-  // b_context.drawImage(explosion, frameWidth* frameStepX,frameHeight*frameStepY ,  frameWidth,  frameHeight,200,200,  frameWidth,  frameHeight); 
-  //  if (actualFrame > frames) {  
-  //     frameStepX = 0;
-  //     frameStepY=0;  
-  //     actualFrame=0;
-  //   } 
-  //   else {  
-  //     if(frameCount==30){
-  //       frameStepX++;  
-  //       frameCount=0;
-  //       actualFrame++;
-  //       if (frameWidth*frameStepX>=edgex){
-  //         frameStepY+=1;
-  //         frameStepX=0;
-  //       }
-  //     }
-
-  //   }  
-  //   frameCount++;
-  //  	 b_context.fillText("edgex = "+edgex,10,50);
-  //  	 b_context.fillText("frameStepX = " +frameStepX,10,80);
-  //     b_context.fillText("frame = " +frameStepY,10,110);
-   
-   
-
-  b_context.beginPath();
-  b_context.strokeStyle = 'red';
-  for (var i = 0; i < 21; i++) {
-  	 	b_context.moveTo(0,window.innerHeight/20*i);
-  		b_context.lineTo(window.innerWidth,window.innerHeight/20*i);
-  		b_context.moveTo(window.innerWidth/20*i,0);
-  		b_context.lineTo(window.innerWidth/20*i,window.innerHeight);
+  if (!stop) {
+      b_context.clearRect(0,0,window.innerWidth,window.innerHeight);
+      b_context.drawImage(BackGround,0,0,b_canvas.width,b_canvas.height);
+      cowManager.update();
+      //bullets collide with more than one enemy at per frame
+      //because of each bullet being checked with every enemy on screen
+      enemyManager.update(player.myBullets,cowManager.cows);
+      player.update();
+      window.requestAnimFrame(update, document.body);
   };
-  b_context.stroke();
+   	
+  
+   
+
+  // b_context.beginPath();
+  // b_context.strokeStyle = 'red';
+  // for (var i = 0; i < 21; i++) {
+  // 	 	b_context.moveTo(0,window.innerHeight/20*i);
+  // 		b_context.lineTo(window.innerWidth,window.innerHeight/20*i);
+  // 		b_context.moveTo(window.innerWidth/20*i,0);
+  // 		b_context.lineTo(window.innerWidth/20*i,window.innerHeight);
+  // };
+  // b_context.stroke();
 
 
-window.requestAnimFrame(update, document.body);
+
 };
 
+$('.play').click(function() {
+  $('#menu').hide();
+  $('#hud').show();
+  stop=false;
+  update();
 
+  
+});
+$('.exit').click(function() {
+  $('#menu').show();
+  $('#hud').hide();
+  stop=true;
+  
+});
 
 function doTouchStart(event){
 
@@ -113,8 +93,12 @@ var app = {
     // Application Constructor
     initialize: function() {
        
+    $('#main').show();
+    $('#menu').addClass('main');
+    $('#hud').hide();
 
-		  window.requestAnimFrame(update, document.body);
+    
+		  //window.requestAnimFrame(update, document.body);
     }
     
 };
