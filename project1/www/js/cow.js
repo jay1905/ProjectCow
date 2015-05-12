@@ -16,6 +16,7 @@ function cow(){
 	this.moveTurn = true;
 	//////////////////////	
 	this.abductded=false;
+	this.startAbducting=false;
 	this.targeted=false;
 	///////////////////////
 	this.imageCow = new Image();
@@ -23,7 +24,7 @@ function cow(){
 	this.cowSizeX=window.innerWidth/20*2.5;
 	this.cowSizeY=window.innerHeight/20*2.5;
 	this.cowPositionX=window.innerWidth/20*(Math.random()*21);
-	this.cowPositionY=window.innerHeight/20*12;
+	this.cowPositionY=window.innerHeight/20*(11+(Math.random()*7));
  	/////////////////////////////////////////////
  
 	 this.update=function(){

@@ -42,8 +42,8 @@ var enemyManager = new (function(){
 				//the enemy might target a cow
 				if(Math.floor(Math.random()*50)==5){
 					
-					this.num = Math.floor(Math.random()*cows.length);
-					if (cows[this.num].targeted==false) {
+					this.num = Math.floor(Math.random()*cows.length);//some times triws error if aliens are created first and
+					if (cows[this.num].targeted==false) {//try to abduct cow
 						this.enemies[this.i].cowNumber=this.num;
 						this.enemies[this.i].abducting=true;
 						cows[this.num].targeted=true;

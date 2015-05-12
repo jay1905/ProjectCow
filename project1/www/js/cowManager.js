@@ -18,7 +18,7 @@ var cowManager = new (function(){
 					}
 		}	
 		if(this.cows.length<5){
-			if(Math.floor(Math.random()*11)==5){
+			if(Math.floor(Math.random()*6)==5){
 				this.createCow();
 			}
 		}
