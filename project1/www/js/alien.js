@@ -15,9 +15,17 @@ function alien(){
 	this.abducting=false;
 	this.cowNumber;
 	this.arived=false;
+	this.tractorBeam=false;
 	
 	this.imageAlien = new Image();
 	this.imageAlien.src = 'img/alien.png';
+	this.imageAlien.style.opacity=0.3;
+	this.imageBeam= document.createElement("IMG");
+	this.imageBeam.src= 'img/beam.png';
+	
+	 
+	
+
 	this.alienSizeX=window.innerWidth/20*4;
 	this.alienSizeY=window.innerHeight/20*4;
 	this.alienPositionX=window.innerWidth/20*(Math.random()*21);
@@ -65,6 +73,9 @@ function alien(){
 			if(this.alienPositionY<cow.cowPositionY-300){
 				this.alienPositionY+=1;
 			}
+			else{
+				this.tractorBeam=true;
+			}
 
 		}
 	};
@@ -73,11 +84,19 @@ function alien(){
 		this.health-=amount;
 	};
 	this.draw = function(){  
+
  		b_context.save(); 
+ 		
 	 	b_context.translate(this.alienPositionX, this.alienPositionY);
 	 	b_context.rotate(this.angle * TO_RADIANS);
 	 	b_context.drawImage(this.imageAlien, -(this.alienSizeX/2), -(this.alienSizeY/2),this.alienSizeX,this.alienSizeY);
 
+
+	 	if(this.tractorBeam){
+	 		
+	 		
+	 		b_context.drawImage(this.imageBeam, -(this.alienSizeX/2), this.alienSizeY/2,this.alienSizeX,this.alienSizeY+100);
+	 	}
 	 		 // Red rectangle
 	      // b_context.beginPath();
 	      // b_context.lineWidth="1";
