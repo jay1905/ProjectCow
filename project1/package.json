@@ -1,0 +1,14 @@
+{
+  "name": "com.jaime.moocow",
+  "version": "0.0.1",
+  "displayName": "MooCow",
+  "cordova": {
+    "platforms": [
+      "android"
+    ]
+  },
+  "dependencies": {
+    "cordova-android": "~7.0.0",
+    "gradle": "^1.0.9"
+  }
+}

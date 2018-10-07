@@ -1,0 +1,43 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {
+      "res/xml/config.xml": {
+        "parents": {
+          "/*": [
+            {
+              "xml": "<feature name=\"Device\"><param name=\"android-package\" value=\"org.apache.cordova.device.Device\" /></feature>",
+              "count": 1
+            }
+          ]
+        }
+      }
+    }
+  },
+  "installed_plugins": {
+    "org.apache.cordova.console": {
+      "PACKAGE_NAME": "com.Jaime.MooCow"
+    },
+    "org.apache.cordova.device": {
+      "PACKAGE_NAME": "com.Jaime.MooCow"
+    }
+  },
+  "dependent_plugins": {},
+  "modules": [
+    {
+      "id": "org.apache.cordova.device.device",
+      "file": "plugins/org.apache.cordova.device/www/device.js",
+      "pluginId": "org.apache.cordova.device",
+      "clobbers": [
+        "device"
+      ]
+    }
+  ],
+  "plugin_metadata": {
+    "org.apache.cordova.console": "0.2.11",
+    "org.apache.cordova.device": "0.2.12"
+  }
+}
